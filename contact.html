@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Service Request</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #12151c;
+      --surface: #1c212b;
+      --border: #2a3140;
+      --text: #eceae3;
+      --text-dim: #9199ab;
+      --accent: #5fe1c9;
+      --maxw: 980px;
+      --display: 'Space Grotesk', sans-serif;
+      --body: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(95, 225, 201, 0.10), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(232, 162, 75, 0.06), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 40px 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 28px;
+    }
+
+    .logo {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+
+    .logo .dot {
+      color: var(--accent);
+    }
+
+    .eyebrow {
+      font-family: var(--display);
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      margin-bottom: 18px;
+    }
+
+    p.lead {
+      max-width: 58ch;
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .field {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    label {
+      font-family: var(--display);
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    input,
+    textarea,
+    select {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 1rem;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      min-height: 48px;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    select option {
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(95, 225, 201, 0.08);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 6px;
+    }
+
+    .btn {
+      font-family: var(--display);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0c1210;
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .note {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .status {
+      margin-top: 18px;
+      font-family: var(--body);
+      font-size: 0.98rem;
+    }
+
+    .status.success {
+      color: #7bed9f;
+    }
+
+    .status.error {
+      color: #ff7b72;
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .wrap {
+        padding: 28px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a href="index.html" class="logo">niraj<span class="dot">.</span>dev</a>
+    <a href="index.html" class="btn btn-ghost">Back</a>
+  </header>
+
+  <main class="wrap">
+    <div class="eyebrow">service request</div>
+    <h1>Send your request</h1>
+    <p class="lead">Share the details of your project or service request. Your message will be delivered to my email.</p>
+
+    <div class="form-card">
+      <form id="contactForm">
+        <input type="hidden" name="access_key" value="5328cdf7-9cb0-44ed-8e1a-98aa026bf7a6" />
+        <input type="hidden" name="subject" value="Service request from portfolio" />
+        <input type="hidden" name="redirect" value="" />
+        <input type="text" name="botcheck" style="display:none;visibility:hidden;" autocomplete="off" />
+
+        <div class="grid">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="address">Address</label>
+          <textarea id="address" name="address" placeholder="Your address or city" required></textarea>
+        </div>
+
+        
+        <div class="grid">
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" placeholder="+91 12345 67890" required />
+          </div>
+          <div class="field">
+            <label for="service">Service needed</label>
+            <select id="service" name="service" required>
+              <option value="">Choose a service</option>
+              <option value="🌐 Website build">Website build</option>
+              <option value="👨‍🏫 Mentorship">Mentorship</option>
+              <option value="🎓 Engineering guidance">Engineering guidance</option>
+              <option value="💡 Tech workshops">Tech workshop</option>
+              <option value="🤖 AI Agent Development">Tech workshop</option>
+              <option value="💻 Software Development">Tech workshop</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="message">Service description</label>
+          <textarea id="message" name="message" placeholder="Describe what you need and any details that matter" required></textarea>
+        </div>
+
+        <div class="button-row">
+          <button type="submit" class="btn btn-primary">Send request</button>
+          <span class="note">Your request will be delivered to my email.</span>
+        </div>
+        <div id="statusMessage" class="status"></div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const statusMessage = document.getElementById('statusMessage');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      statusMessage.textContent = '';
+      statusMessage.className = 'status';
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          statusMessage.textContent = '✅ Your request has been sent successfully. Thank you!';
+          statusMessage.classList.add('success');
+          form.reset();
+        } else {
+          statusMessage.textContent = '❌ ' + (data.message || 'Failed to send the message.');
+          statusMessage.classList.add('error');
+        }
+      } catch (error) {
+        console.error('Web3Forms error:', error);
+        statusMessage.textContent = '❌ Something went wrong. Please try again later.';
+        statusMessage.classList.add('error');
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send request';
+      }
+    });
+  </script>
+</body>
+</html>
