@@ -7,20 +7,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<script>
+  (function () {
+    const storedTheme = localStorage.getItem('portfolio-theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', storedTheme || systemTheme);
+  })();
+</script>
 <style>
   :root{
-    --bg:#12151c;
-    --bg-alt:#171b24;
-    --surface:#1c212b;
-    --surface-2:#232936;
-    --border:#2a3140;
-    --text:#eceae3;
-    --text-dim:#9199ab;
-    --text-faint:#5c6478;
-    --accent:#5fe1c9;
-    --accent-2:#e8a24b;
-    --accent-rgb:95,225,201;
-    --accent2-rgb:232,162,75;
     --display:'Space Grotesk',sans-serif;
     --body:'Inter',sans-serif;
     --mono:'JetBrains Mono',monospace;
@@ -86,7 +82,7 @@
   header{
     position:fixed; top:0; left:0; right:0; z-index:100;
     backdrop-filter:blur(10px);
-    background:rgba(18,21,28,0.72);
+    background:var(--surface);
     border-bottom:1px solid var(--border);
   }
   nav.wrap{
@@ -126,7 +122,7 @@
     left: 0;
     width: 100%;
     height: calc(100vh - 68px);
-    background: #0f172a; /* Change to your preferred color */
+    background: var(--surface);
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -134,7 +130,7 @@
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
     z-index: 9999;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid var(--border);
 }
 
 /* Open Menu */
@@ -149,15 +145,15 @@
     padding: 16px 10px;
     font-size: 18px;
     font-family: var(--mono);
-    color: #ffffff;
+    color: var(--text-dim);
     text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid var(--border);
     transition: background 0.3s, color 0.3s;
 }
 
 .mobile-panel a:hover{
-    background: rgba(255,255,255,0.08);
-    color: #38bdf8;
+    background: var(--surface-2);
+    color: var(--accent);
 }
 
 /* Hide Mobile Menu on Desktop */
@@ -393,10 +389,15 @@
       <a href="#services">Services</a>
       <a href="#achievements">Achievements</a>
     </div>
-    <a href="#contact" class="nav-cta">Contact</a>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-actions">
+      <a href="#contact" class="nav-cta">Contact</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false" data-theme-toggle>
+        <span class="theme-toggle__icon" aria-hidden="true">🌙</span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
   <div class="mobile-panel" id="mobilePanel">
     <a href="#about">About</a>
@@ -419,7 +420,7 @@
       <div class="hero-actions">
         <a href="#projects" class="btn btn-primary">View projects</a>
         <a href="#contact" class="btn btn-ghost">Get in touch</a>
-        <a href="https://www.image2url.com/r2/default/documents/1784710641650-b8ade438-cb7b-4502-ace2-20fe2bbfb98d.pdf" class="btn btn-ghost" download>Download resume</a>
+        <a href="Niraj_Kumar_Resume.pdf" class="btn btn-ghost" download>Download resume</a>
       </div>
       <div class="hero-meta">
         <div><span>Location</span> — Madhubani, Bihar, India</div>
@@ -472,7 +473,7 @@
         <div>
           <h3>Motihari College of Engineering</h3>
           <p>B.Tech in Computer Science and Artificial Intelligence</p>
-          <span class="cgpa-badge">CGPA: 7.5</span>
+          <span class="cgpa-badge">CGPA: 7.5as</span>
         </div>
       </div>
       <div class="edu-row reveal">
@@ -676,18 +677,16 @@
       <a href="https://github.com/nirajkumar3308" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
     GitHub
 </a>
-           <a href="https://www.instagram.com/invisible_4___you?igsh=MTAxcmN2MHhwZzN2OQ==" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-    Instagram
-</a>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>Designed &amp; built by Niraj Kumar · 2026</p>
+    <p>Designed &amp; built by Niraj🍪·2026</p>
   </footer>
 </main>
 
+<script src="theme.js"></script>
 <script>
   // Mobile menu toggle
   const menuBtn = document.getElementById('menuBtn');
