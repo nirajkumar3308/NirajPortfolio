@@ -7,14 +7,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <script>
+    (function () {
+      const storedTheme = localStorage.getItem('portfolio-theme');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', storedTheme || systemTheme);
+    })();
+  </script>
   <style>
     :root {
-      --bg: #12151c;
-      --surface: #1c212b;
-      --border: #2a3140;
-      --text: #eceae3;
-      --text-dim: #9199ab;
-      --accent: #5fe1c9;
       --maxw: 980px;
       --display: 'Space Grotesk', sans-serif;
       --body: 'Inter', sans-serif;
@@ -234,7 +236,12 @@
 <body>
   <header class="wrap">
     <a href="index.html" class="logo">niraj<span class="dot">.</span>dev</a>
-    <a href="index.html" class="btn btn-ghost">Back</a>
+    <div class="header-actions">
+      <button class="theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false" data-theme-toggle>
+        <span class="theme-toggle__icon" aria-hidden="true">🌙</span>
+      </button>
+      <a href="index.html" class="btn btn-ghost">Back</a>
+    </div>
   </header>
 
   <main class="wrap">
@@ -300,6 +307,7 @@
     </div>
   </main>
 
+  <script src="theme.js"></script>
   <script>
     const form = document.getElementById('contactForm');
     const statusMessage = document.getElementById('statusMessage');
